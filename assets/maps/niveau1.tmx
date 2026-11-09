@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+ <tileset firstgid="1" source="../sprites/world_tileset.tsx"/>
+ <tileset firstgid="257" source="../sprites/platforms.tsx"/>
+ <layer id="1" name="background" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJybyMDAMHEQ44WDHG8cxaN4FI/iEYoPDnJ8cRSP4lE8ZPHDQY4/jmKKMABWPF2/
+  </data>
+ </layer>
+ <layer id="4" name="objet" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwEYDrQDCABHItSY0dwVuEEgEWrcaO4K8kEGEIcNtCNGwSgYBaMADSQNtAOwgMaBdsAoGAWjgGIAANn6AuE=
+  </data>
+ </layer>
+ <layer id="2" name="ground" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztlf0OgiAUxW9taVb/2KbkE/j+bxgsTjtcwe9yNX/bmeIFzgEaiezs/CYHr6m1b+C8Sy9kuVjdIrUpnEhzMsHPed8px5H6oY3aGE/UKqvMqp6Rj3OU6nvZ7f4m875VxBe5K8pXUXtqvr4cQ8A3o2w695J8a8DemXRz1LJtvn9m6zurD74rcquHf7o77Sqvey33cpy9xrJkLPYN+YxV458MvjtaL/gNZTM0H8amxp0lXEMp4T1rJJwPFBEPvKe83DlgrXptLfWBYnX9X1Co+UBsD/R7LuFZGumuV/s3Ep6Xri+F53IevM9op8ahD/dbO5/24r1IZWNSv6dPoPdiKU+pXQ3J
+  </data>
+ </layer>
+ <layer id="3" name="platform" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztztEJAAAIhNDaf+k4GiIhH/hvlSTd6N5oqE/Er6B+BflNkr4abjEADw==
+  </data>
+ </layer>
+</map>
