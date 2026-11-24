@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="9">
  <tileset firstgid="1" source="../sprites/world_tileset.tsx"/>
  <tileset firstgid="257" source="../sprites/platforms.tsx"/>
  <layer id="1" name="background" width="40" height="20">
   <data encoding="base64" compression="zlib">
    eJybyMDAMHEQ44WDHG8cxaN4FI/iEYoPDnJ8cRSP4lE8ZPHDQY4/jmKKMABWPF2/
-  </data>
- </layer>
- <layer id="4" name="objet" width="40" height="20">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFgwEYDrQDCABHItSY0dwVuEEgEWrcaO4K8kEGEIcNtCNGwSgYBaMADSQNtAOwgMaBdsAoGAWjgGIAANn6AuE=
   </data>
  </layer>
  <layer id="2" name="ground" width="40" height="20">
@@ -22,4 +17,29 @@
    eJztztEJAAAIhNDaf+k4GiIhH/hvlSTd6N5oqE/Er6B+BflNkr4abjEADw==
   </data>
  </layer>
+ <layer id="4" name="objet" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwEYDrQDCABHItSY0dwVuEEgEWrcaO4K8kEGEIcNtCNGwSgYBaMADSQNtAOwgMaBdsAoGAWjgGIAANn6AuE=
+  </data>
+ </layer>
+ <objectgroup id="9" name="entities">
+  <object id="3" type="player" x="72" y="190.333">
+   <point/>
+  </object>
+  <object id="4" type="Coin" x="120" y="207.333">
+   <point/>
+  </object>
+  <object id="5" type="Coin" x="135.333" y="111.333">
+   <point/>
+  </object>
+  <object id="6" type="Coin" x="342.667" y="256">
+   <point/>
+  </object>
+  <object id="7" type="Coin" x="552.667" y="239.333">
+   <point/>
+  </object>
+  <object id="8" type="Coin" x="599.333" y="80.6667">
+   <point/>
+  </object>
+ </objectgroup>
 </map>
