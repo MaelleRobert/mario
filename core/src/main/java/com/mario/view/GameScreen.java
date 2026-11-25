@@ -10,12 +10,13 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mario.model.Level;
-import com.mario.model.SpawnPoint;
+import com.mario.model.entities.Entity;
+import com.mario.model.entities.Player;
 import com.mario.tiled.TiledMapLoader;
 
 /**
- * Écran de jeu. Étape 1 : affiche la carte et déplace la caméra aux flèches.
- * (Le déplacement de caméra ira plus tard dans le contrôleur / suivra le joueur.)
+ * Écran de jeu. Étape 2 : affiche la carte et les entités créées depuis Tiled.
+ * La caméra se déplace encore aux flèches (elle suivra le joueur plus tard).
  */
 public class GameScreen implements Screen {
 
@@ -35,12 +36,12 @@ public class GameScreen implements Screen {
         this.level = loader.buildLevel(map);
         this.worldRenderer = new WorldRenderer(map);
 
-        for (SpawnPoint sp : level.getSpawnPoints()) {
-            Gdx.app.log("LEVEL", sp.getType() + " x=" + sp.getX() + " y=" + sp.getY());
+        for (Entity e : level.getEntities()) {
+            Gdx.app.log("LEVEL", e.getType() + " x=" + e.getX() + " y=" + e.getY());
         }
 
         // La caméra démarre sur le joueur s'il existe, sinon au centre de la carte.
-        SpawnPoint player = level.findFirst("player");
+        Player player = level.getPlayer();
         if (player != null) {
             camera.position.set(player.getX(), player.getY(), 0);
         } else {
@@ -50,6 +51,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        level.update(delta);
+
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -58,7 +61,7 @@ public class GameScreen implements Screen {
         clampCamera();
         camera.update();
 
-        worldRenderer.render(camera);
+        worldRenderer.render(camera, level.getEntities(), delta);
     }
 
     private void moveCamera(float delta) {

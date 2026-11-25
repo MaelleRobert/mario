@@ -23,22 +23,22 @@
   </data>
  </layer>
  <objectgroup id="9" name="entities">
-  <object id="3" type="player" x="72" y="190.333">
+  <object id="3" type="player" x="70.9091" y="177.606">
    <point/>
   </object>
-  <object id="4" type="Coin" x="120" y="207.333">
+  <object id="4" type="coin" x="120" y="200.768">
    <point/>
   </object>
-  <object id="5" type="Coin" x="135.333" y="111.333">
+  <object id="5" type="coin" x="135.878" y="105.242">
    <point/>
   </object>
-  <object id="6" type="Coin" x="342.667" y="256">
+  <object id="6" type="coin" x="343.758" y="250.545">
    <point/>
   </object>
-  <object id="7" type="Coin" x="552.667" y="239.333">
+  <object id="7" type="coin" x="552.23" y="232.645">
    <point/>
   </object>
-  <object id="8" type="Coin" x="599.333" y="80.6667">
+  <object id="8" type="coin" x="600.606" y="73.394">
    <point/>
   </object>
  </objectgroup>

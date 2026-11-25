@@ -8,9 +8,13 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mario.model.Level;
 import com.mario.model.SpawnPoint;
+import com.mario.model.entities.Entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Seule classe qui connaît le format Tiled : elle lit le .tmx et fabrique un Level.
@@ -18,13 +22,15 @@ import java.util.List;
  * Convention (le "contrat" avec Tiled) :
  *  - un calque d'objets nommé "entities" ;
  *  - chaque objet a un champ Class/Type ("player", "coin", ...) ;
- *  - la position de l'objet est celle de son point.
+ *  - la position de l'objet est celle de son point ;
+ *  - les propriétés personnalisées de l'objet (ex. "speed") sont transmises à la factory.
  */
 public class TiledMapLoader {
 
     private static final String ENTITIES_LAYER = "entities";
 
     private final TmxMapLoader loader = new TmxMapLoader();
+    private final TiledEntityFactory factory = new TiledEntityFactory();
 
     /** Charge le fichier .tmx (l'appelant devient responsable de dispose()). */
     public TiledMap loadMap(String path) {
@@ -38,7 +44,18 @@ public class TiledMapLoader {
         int height = props.get("height", Integer.class);
         int tileSize = props.get("tilewidth", Integer.class);
 
-        return new Level(width, height, tileSize, readSpawnPoints(map));
+        return new Level(width, height, tileSize, createEntities(map));
+    }
+
+    private List<Entity> createEntities(TiledMap map) {
+        List<Entity> entities = new ArrayList<>();
+        for (SpawnPoint spawn : readSpawnPoints(map)) {
+            Entity entity = factory.create(spawn);
+            if (entity != null) {
+                entities.add(entity);
+            }
+        }
+        return entities;
     }
 
     private List<SpawnPoint> readSpawnPoints(TiledMap map) {
@@ -58,9 +75,19 @@ public class TiledMapLoader {
                 Gdx.app.error("TiledMapLoader", "Objet ignoré (type/x/y manquant) : " + object.getName());
                 continue;
             }
-            result.add(new SpawnPoint(type, x, y));
+            result.add(new SpawnPoint(type, x, y, copyProperties(p)));
         }
         return result;
+    }
+
+    private Map<String, Object> copyProperties(MapProperties p) {
+        Map<String, Object> copy = new HashMap<>();
+        Iterator<String> keys = p.getKeys();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            copy.put(key, p.get(key));
+        }
+        return copy;
     }
 
     /** Selon la version, LibGDX expose le champ Class de Tiled sous "type" ou "class". */

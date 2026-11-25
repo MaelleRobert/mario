@@ -1,25 +1,33 @@
 package com.mario.model;
 
+import com.mario.model.entities.Entity;
+import com.mario.model.entities.Player;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
- * Données logiques d'un niveau : dimensions et points d'apparition des entités.
- * Aucune dépendance au dessin.
+ * Données logiques d'un niveau : dimensions et entités. Aucune dépendance au dessin.
  */
 public class Level {
 
     private final int widthInTiles;
     private final int heightInTiles;
     private final int tileSize;
-    private final List<SpawnPoint> spawnPoints;
+    private final List<Entity> entities;
 
-    public Level(int widthInTiles, int heightInTiles, int tileSize, List<SpawnPoint> spawnPoints) {
+    public Level(int widthInTiles, int heightInTiles, int tileSize, List<Entity> entities) {
         this.widthInTiles = widthInTiles;
         this.heightInTiles = heightInTiles;
         this.tileSize = tileSize;
-        this.spawnPoints = new ArrayList<>(spawnPoints);
+        this.entities = new ArrayList<>(entities);
+    }
+
+    public void update(float delta) {
+        for (Entity entity : entities) {
+            entity.update(delta);
+        }
     }
 
     public float getWidthInPixels() {
@@ -34,15 +42,15 @@ public class Level {
         return tileSize;
     }
 
-    public List<SpawnPoint> getSpawnPoints() {
-        return Collections.unmodifiableList(spawnPoints);
+    public List<Entity> getEntities() {
+        return Collections.unmodifiableList(entities);
     }
 
-    /** Premier point d'apparition du type demandé, ou null s'il n'y en a pas. */
-    public SpawnPoint findFirst(String type) {
-        for (SpawnPoint sp : spawnPoints) {
-            if (sp.getType().equals(type)) {
-                return sp;
+    /** Le joueur du niveau, ou null si la carte n'en contient pas. */
+    public Player getPlayer() {
+        for (Entity entity : entities) {
+            if (entity instanceof Player) {
+                return (Player) entity;
             }
         }
         return null;
